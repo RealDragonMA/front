@@ -1,7 +1,8 @@
+<script>
+    import HelloCard from "./HeroCard.svelte";
+</script>
 <div class="h-screen w-screen flex flex-row justify-center items-center text-7xl">
-    <p>Hello World</p>
-    <span class='hello-emoji'>👋</span>
-    <p>!</p>
+    <HelloCard></HelloCard>
 </div>
 
 <style>
