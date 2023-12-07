@@ -61,13 +61,29 @@
 
     function canGoRight(): boolean{
         let canGo = true
-        console.log(piece.piece)
         for (let i = 0; i < 3; i++) {
-            console.log(piece.y)
-            if (piece.piece[i][2] == 1 && piece.y + 3 > 12){
+            console.log("y = "+piece.y)
+            let newy = piece.y+1
+            if (piece.piece[i][2] == 1 && newy+1 > 11){
                 return false
             }
-            if (piece.piece[i][1] == 1 && piece.y + 4 > 12){
+            if (piece.piece[i][1] == 1 && newy+2 > 11){
+                return false
+            }
+        }
+        console.log(canGo)
+        return canGo
+    }
+
+    function canGoDown(): boolean{
+        let canGo = true
+        for (let i = 0; i < 3; i++) {
+            console.log("x = "+piece.x)
+            let newx = piece.x+1
+            if (piece.piece[2][i] == 1 && newx+1 > 24){
+                return false
+            }
+            if (piece.piece[1][i] == 1 && newx+2 > 24){
                 return false
             }
         }
@@ -82,7 +98,16 @@
             rotatePiece()
             insertPieceInTab(piece)
         }
-
+        if(event.key === 'k'){
+            while (canGoDown()){
+                removePiece()
+                piece.x++
+                console.log(piece.y)
+                insertPieceInTab(piece)
+            }
+            generatePiece()
+            insertPieceInTab(piece)
+        }
         if (event.key === 'p') {
             if (canGoRight()){
                 removePiece()
@@ -99,15 +124,15 @@
         }
     });
 
-    /*setInterval(() => {
+    setInterval(() => {
         movePieceDown()
-    }, 1000)*/
+    }, 1000)
 
 
 
 
 
-    
+
 </script>
 
 <div class="h-screen w-screen bg-white-200 overflow-hidden flex flex-col justify-between">
