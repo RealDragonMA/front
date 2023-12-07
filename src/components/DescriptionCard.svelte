@@ -7,7 +7,7 @@
 </script>
 
 <div class="w-full h-full">
-    <div class="card flex p-4 shadow-xl bg-white backdrop-blur-md opacity-60 rounded-md">
+    <div class="card flex shadow-xl bg-white backdrop-blur-md opacity-60 rounded-md">
         <div class="card-body">
             <h2 class="card-title text-3xl text-black">{title}</h2>
             <hr class="my-2 border-t-2 border-gray-300">

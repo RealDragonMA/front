@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
     import type IResponse from "../interfaces/IResponse";
     import DescriptionCard from "../components/DescriptionCard.svelte";
     import ChoiceCard from "../components/ChoiceCard.svelte";
@@ -8,9 +9,13 @@
     export let description: string = "glinglin";
 
     let cols: string = "grid-cols-" + (responses.length ?? 1);
+
+    onMount(() => {
+        cols = "grid-cols-" + (responses.length ?? 1);
+    })
 </script>
 
-<div class="w-1/3 h-1/5 absolute top-5 left-5">
+<div class="w-1/3 h-36 absolute top-5 left-5">
     <DescriptionCard title={title} description={description}/>
 </div>
 
@@ -20,7 +25,7 @@
 </div>
 
 
-<div class="w-full absolute bottom-10 grid {cols} gap-6 p-16">
+<div class="w-full absolute bottom-10 flex flex-row gap-6 justify-center p-8">
     {#each responses as response}
         <div class="h-36">
             <ChoiceCard name={title} logoRoute="../public/farmer.png"/>

@@ -2,7 +2,6 @@
     export let name : string;
     export let logoRoute : string;
 
-
 </script>
 
 <div class="">
@@ -10,6 +9,6 @@
         <div>
             <h2 class="card-title text-3xl pt-2 justify-center divide-y">{name}</h2>
         </div>
-        <figure class="p-10"><img class="w-24" src={logoRoute} alt="Shoes" /></figure>
+        <figure class="p-8"><img class="w-16" src={logoRoute} alt="Shoes" /></figure>
     </div>
 </div>
