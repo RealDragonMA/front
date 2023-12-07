@@ -1,7 +1,7 @@
 <div class="h-screen w-screen flex flex-row justify-center items-center text-7xl">
-    <p>Hello World</p>
-    <span class='hello-emoji'>👋</span>
-    <p>!</p>
+    <spline-viewer
+            url="./assets/earth_copy.spline"
+    ></spline-viewer>
 </div>
 
 <style>
