@@ -1,7 +1,7 @@
 <script lang="ts">
     import type IResponse from "../interfaces/IResponse";
     import DescriptionCard from "../components/DescriptionCard.svelte";
-    import ResponseCard from "../components/ResponseCard.svelte";
+    import ChoiceCard from "../components/ChoiceCard.svelte";
 
     export let responses: number[] = [1, 2, 3, 4];
     export let title: string = "bonsoir";
@@ -20,10 +20,10 @@
 </div>
 
 
-<div class="w-full absolute bottom-10 grid {cols} gap-6 p-8">
+<div class="w-full absolute bottom-10 grid {cols} gap-6 p-16">
     {#each responses as response}
         <div class="h-36">
-            <ResponseCard/>
+            <ChoiceCard name={title} logoRoute="../public/farmer.png"/>
         </div>
     {/each}
 </div>

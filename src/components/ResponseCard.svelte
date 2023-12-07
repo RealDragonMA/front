@@ -1,1 +1,0 @@
-<div class="h-full w-full border-2 border-solid border-black"></div>
