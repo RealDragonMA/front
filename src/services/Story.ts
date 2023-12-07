@@ -9,7 +9,7 @@ class Story {
         return (await restAPI.get(`${this.controller}`)).data;
     }
 
-    public async get(option: { storyId: string }): Promise<IStory | IError> {
+    public async get(option: { storyId: string }): Promise<IStory> {
         return (await restAPI.get(`${this.controller}/${option.storyId}`)).data;
     }
 }

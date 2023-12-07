@@ -13,6 +13,7 @@
     let myChoice: string = "";
 
     let hero: IHero | undefined = undefined;
+    let currentStory: IStory | undefined = undefined;
     let title: string = "Bienvenue !";
     let desc: string = "En tant que ???, vous allez devoir agir pour faire face au changement climatique.";
     let responses: IResponse[] = [{_id: "1", title: "Suivant"}];
@@ -21,10 +22,11 @@
         desc = "En tant que " + hero?.name + ", vous allez devoir agir pour faire face au changement climatique.";
     }
 
-    function next(): void {
+    async function next(): Promise<void> {
         if(!myStory.includes(myChoice)){
             myStory = [...myStory, myChoice];
         }
+        currentStory = await (Story.get({storyId: myChoice}));
     }
 
     function goBack(): void {
@@ -46,7 +48,7 @@
     $: myChoice && next();
 </script>
 
-<Index bind:myHero={hero} bind:myChoice={myChoice} title={title} description={desc} responses={responses} goBack={goBack}>
+<Index bind:myHero={hero} bind:myChoice={myChoice} title={currentStory?.title ?? title} description={currentStory?.description ?? desc} responses={currentStory?.responses ?? responses} goBack={goBack}>
     <div slot="page" class="h-full w-full">
         <Maison/>
     </div>

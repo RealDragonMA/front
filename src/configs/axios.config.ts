@@ -1,7 +1,8 @@
 import axios, { type AxiosInstance } from 'axios';
+import type IError from "../interfaces/IError";
 
 const restAPI: AxiosInstance = axios.create({
-    baseURL: 'http://localhost',
+    baseURL: 'http://localhost:8080',
 });
 
 restAPI.interceptors.response.use(
