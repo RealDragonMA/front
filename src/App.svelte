@@ -1,8 +1,13 @@
 <script lang="ts">
+    import {onMount} from "svelte";
     import Index from "./route/Index.svelte";
     import Maison from "./route/Maison.svelte";
     import type IHero from "./interfaces/IHero";
     import type IResponse from "./interfaces/IResponse";
+    import type IStory from "./interfaces/IStory";
+    import Story from "./services/Story";
+
+    let allStory: IStory[] = [];
 
     let myStory: string[] = [];
     let myChoice: string = "";
@@ -19,6 +24,10 @@
     function next(): void {
         myStory = [...myStory, myChoice];
     }
+
+    onMount(async () => {
+        allStory = await (Story.getAll());
+    })
 
     $: hero && update();
     $: myChoice && next();
