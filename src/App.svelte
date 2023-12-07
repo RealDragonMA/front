@@ -22,7 +22,20 @@
     }
 
     function next(): void {
-        myStory = [...myStory, myChoice];
+        if(!myStory.includes(myChoice)){
+            myStory = [...myStory, myChoice];
+        }
+    }
+
+    function goBack(): void {
+        myStory = myStory.slice(0, myStory.length - 1);
+        if(myStory.length > 0){
+            myChoice = myStory[myStory.length - 1];
+        } else {
+            myChoice = "";
+            myStory = [];
+            hero = undefined;
+        }
     }
 
     onMount(async () => {
@@ -33,7 +46,7 @@
     $: myChoice && next();
 </script>
 
-<Index bind:myHero={hero} bind:myChoice={myChoice} title={title} description={desc} responses={responses}>
+<Index bind:myHero={hero} bind:myChoice={myChoice} title={title} description={desc} responses={responses} goBack={goBack}>
     <div slot="page" class="h-full w-full">
         <Maison/>
     </div>
