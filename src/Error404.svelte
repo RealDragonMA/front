@@ -17,8 +17,7 @@
         piece.piece = pieces[Math.floor(Math.random() * pieces.length)]
         piece.color =  stringColors[Math.floor(Math.random() * stringColors.length)]
         piece.x = 0
-        piece.y = 4
-        console.log(piece.piece)
+        piece.y = 5
     }
     function insertPieceInTab(piece: IPiece){
         for (let i = 0; i < piece.piece.length; i++) {
@@ -59,17 +58,41 @@
         insertPieceInTab(piece)
     }
 
+    function canGoLeft(): boolean{
+        let canGo = true
+        console.log(piece.y)
+        for (let i = 0; i < 3; i++) {
+            if (piece.piece[i][0] == 1 && (piece.y-1) < 0){
+                console.log("here1")
+                canGo = false
+            }
+            else if (piece.piece[i][1] == 1 && (piece.y -2) < 0){
+                console.log("here2")
+                canGo = false
+            }
+            else if (piece.piece[i][2] == 1 && (piece.y - 3) < 0){
+                console.log("here3")
+                canGo = false
+            }
+        }
+        console.log(canGo)
+        return canGo
+    }
+
     function canGoRight(): boolean{
         let canGo = true
         for (let i = 0; i < 3; i++) {
-            console.log("y = "+piece.y)
-            let newy = piece.y+1
-            if (piece.piece[i][2] == 1 && newy+1 > 11){
-                return false
+            if (piece.piece[i][2] == 1 && piece.y + 4 > 12){
+                console.log("here1")
+                canGo = false
             }
-            if (piece.piece[i][1] == 1 && newy+2 > 11){
-                return false
+            else if (piece.piece[i][1] == 1 && piece.y + 3 > 12){
+                console.log("here2")
+                canGo = false
             }
+            else if (piece.piece[i][0] == 1 && piece.y + 2 > 12){
+                console.log("here2")
+                canGo = false
         }
         console.log(canGo)
         return canGo
@@ -92,7 +115,6 @@
     }
 
     document.addEventListener('keypress', (event) => {
-        console.log(event.key)
         if (event.key === ' ') {
             removePiece()
             rotatePiece()
@@ -112,15 +134,18 @@
             if (canGoRight()){
                 removePiece()
                 piece.y++
-                console.log(piece.y)
                 insertPieceInTab(piece)
             }
         }
 
         if (event.key === 'l') {
-            removePiece()
-            piece.y--
-            insertPieceInTab(piece)
+            console.log("oui")
+            if (canGoLeft()){
+                removePiece()
+                piece.y--
+                insertPieceInTab(piece)
+            }
+
         }
     });
 
