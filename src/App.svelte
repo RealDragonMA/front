@@ -1,7 +1,9 @@
+<script>
+    import Error404 from "./Error404.svelte";
+</script>
+
 <div class="h-screen w-screen flex flex-row justify-center items-center text-7xl">
-    <p>Hello World</p>
-    <span class='hello-emoji'>👋</span>
-    <p>!</p>
+    <Error404 />
 </div>
 
 <style>
