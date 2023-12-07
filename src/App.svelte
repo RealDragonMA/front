@@ -1,10 +1,30 @@
 <script lang="ts">
     import Index from "./route/Index.svelte";
     import Maison from "./route/Maison.svelte";
-    import {HEROS} from "./configs/constant";
+    import type IHero from "./interfaces/IHero";
+    import type IResponse from "./interfaces/IResponse";
 
+    let myStory: string[] = [];
+    let myChoice: string = "";
+
+    let hero: IHero | undefined = undefined;
+    let title: string = "Bienvenue !";
+    let desc: string = "En tant que ???, vous allez devoir agir pour faire face au changement climatique.";
+    let responses: IResponse[] = [{_id: "1", title: "Suivant"}];
+
+    function update(): void {
+        desc = "En tant que " + hero?.name + ", vous allez devoir agir pour faire face au changement climatique.";
+    }
+
+    function next(): void {
+        myStory = [...myStory, myChoice];
+    }
+
+    $: hero && update();
+    $: myChoice && next();
 </script>
-<Index heros={HEROS}>
+
+<Index bind:myHero={hero} bind:myChoice={myChoice} title={title} description={desc} responses={responses}>
     <div slot="page" class="h-full w-full">
         <Maison/>
     </div>
