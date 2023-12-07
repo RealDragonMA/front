@@ -3,7 +3,7 @@
     import Maison from "./route/Maison.svelte";
 </script>
 <Index>
-    <div slot="page">
+    <div slot="page" class="h-full w-full">
         <Maison/>
     </div>
 </Index>
