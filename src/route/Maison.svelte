@@ -1,1 +1,1 @@
-<div class="bg-blue-500 h-full w-45">test</div>
+<div class="bg-blue-500 h-full w-full"></div>
