@@ -1,42 +1,15 @@
-<div class="h-screen w-screen flex flex-row justify-center items-center text-7xl">
-    <p>Hello World</p>
-    <span class='hello-emoji'>👋</span>
-    <p>!</p>
+<script lang="ts">
+    import { Route, Router } from "svelte-routing";
+    import Index from "./Index.svelte";
+
+
+
+
+
+</script>
+
+<div class="flex flex-col">
+        <Router>
+            <Route component={Index} path="/" />
+        </Router>
 </div>
-
-<style>
-    .hello-emoji {
-        animation-name: wave-animation;
-        animation-duration: 2.5s;
-        animation-iteration-count: infinite;
-        transform-origin: 70% 70%;
-        display: inline-block;
-    }
-
-    @keyframes wave-animation {
-        0% {
-            transform: rotate(0deg);
-        }
-        15% {
-            transform: rotate(14deg);
-        }
-        30% {
-            transform: rotate(-8deg);
-        }
-        40% {
-            transform: rotate(14deg);
-        }
-        50% {
-            transform: rotate(-4deg);
-        }
-        60% {
-            transform: rotate(10deg);
-        }
-        70% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(0deg);
-        }
-    }
-</style>
