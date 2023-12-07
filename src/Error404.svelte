@@ -1,9 +1,11 @@
 <script lang="ts">
     import {onMount} from "svelte";
-    import {pieces} from "./piece";
+    import type IPiece from "./Interface/IPiece";
+    import {pieces} from "./Interface/IPiece";
     let stringColors = "obgrypu"
     let colors = {"0": "bg-white","o": "bg-orange-500", "b": "bg-blue-500", "g": "bg-green-500", "r": "bg-red-500", "y": "bg-yellow-500", "p": "bg-pink-500", "u": "bg-purple-500"}
     let table = []
+    let piece: IPiece = {piece: [], color: "", x: 0, y: 0}
 
     for (let i = 0; i < 25; i++) {
         table.push([])
@@ -11,30 +13,99 @@
             table[i][j] = '0'
         }
     }
-    function generatePiece(): [string[][], string] {
-        let piece: string[][] = pieces[Math.floor(Math.random() * pieces.length)]
-        console.log(piece)
-        return [piece, stringColors[Math.floor(Math.random() * stringColors.length)]]
+    function generatePiece(){
+        piece.piece = pieces[Math.floor(Math.random() * pieces.length)]
+        piece.color =  stringColors[Math.floor(Math.random() * stringColors.length)]
+        piece.x = 0
+        piece.y = 4
+        console.log(piece.piece)
     }
-    function insertPieceInTab(row: number, col: number, piece: [string[][], string]){
-        console.log(piece)
-        console.log("on insert la pièce dans le tableau à la position "+row+" "+col)
-        let tempTable = table
-        for (let i = 0; i < piece[0].length; i++) {
-            for (let j = 0; j < piece[0][i].length; j++) {
-                if (piece[0][i][j] !== 0) {
-                    tempTable[row + i][col + j] = piece[1]
+    function insertPieceInTab(piece: IPiece){
+        for (let i = 0; i < piece.piece.length; i++) {
+            for (let j = 0; j < piece.piece[i].length; j++) {
+                if (piece.piece[i][j] !== 0) {
+                    table[piece.x + i][piece.y + j] = piece.color
                 }
             }
         }
-        $: table = tempTable
         console.log(table);
     }
 
+    function removePiece(){
+        for (let i = 0; i < piece.piece.length; i++) {
+            for (let j = 0; j < piece.piece[i].length; j++) {
+                if (piece.piece[i][j] !== 0) {
+                    table[piece.x + i][piece.y + j] = '0'
+                }
+            }
+        }
+    }
+
+    function rotatePiece(){
+        let tempPiece = piece
+        tempPiece.piece = piece.piece[0].map((_, colIndex) => piece.piece.map(row => row[colIndex]).reverse())
+        piece = tempPiece
+    }
+
+
     onMount(() => {
-        let piece : [string[][], string] = generatePiece()
-        insertPieceInTab(0, 4, piece)
+        generatePiece()
+        insertPieceInTab(piece)
     })
+
+    function movePieceDown(){
+        removePiece()
+        piece.x++
+        insertPieceInTab(piece)
+    }
+
+    function canGoRight(): boolean{
+        let canGo = true
+        console.log(piece.piece)
+        for (let i = 0; i < 3; i++) {
+            console.log(piece.y)
+            if (piece.piece[i][2] == 1 && piece.y + 3 > 12){
+                return false
+            }
+            if (piece.piece[i][1] == 1 && piece.y + 4 > 12){
+                return false
+            }
+        }
+        console.log(canGo)
+        return canGo
+    }
+
+    document.addEventListener('keypress', (event) => {
+        console.log(event.key)
+        if (event.key === ' ') {
+            removePiece()
+            rotatePiece()
+            insertPieceInTab(piece)
+        }
+
+        if (event.key === 'p') {
+            if (canGoRight()){
+                removePiece()
+                piece.y++
+                console.log(piece.y)
+                insertPieceInTab(piece)
+            }
+        }
+
+        if (event.key === 'l') {
+            removePiece()
+            piece.y--
+            insertPieceInTab(piece)
+        }
+    });
+
+    /*setInterval(() => {
+        movePieceDown()
+    }, 1000)*/
+
+
+
+
 
     
 </script>

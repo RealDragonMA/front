@@ -1,3 +1,10 @@
+export default interface IPiece {
+    piece : number[][];
+    color : string;
+    x : number;
+    y : number;
+}
+
 export let pieces = [
     [[0,0,0], [0,0,0], [1,1,1]],
     [[0,1,0], [0,1,0], [0,1,0]],
