@@ -1,10 +1,18 @@
-<div class="card w-96 bg-base-100 shadow-xl">
-    <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-    <div class="card-body">
-        <h2 class="card-title">Shoes!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
+<script lang="ts">
+    let name : string = "Politicien";
+    let desc : string = "Mentez pour gagner";
+    import logo from './assets/politician.png';
+
+</script>
+
+<div class="w-1/5">
+    <div class="p-4 w-full h-full card bg-white shadow-xl rounded-xl divide-y-2 hover:transition-all hover:cursor-pointer hover:scale-105">
+        <figure class="p-10"><img class="w-42" src={logo} alt="Shoes" /></figure>
+        <div>
+            <h2 class="card-title text-3xl pt-2 justify-center divide-y">{name}</h2>
+            <div class="card-body">
+                <p class="text-xl">{desc}</p>
+            </div>
         </div>
     </div>
 </div>

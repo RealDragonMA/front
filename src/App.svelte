@@ -1,8 +1,10 @@
 <script>
-    import HelloCard from "./HeroCard.svelte";
+    import HeroCard from "./HeroCard.svelte";
 </script>
-<div class="h-screen w-screen flex flex-row justify-center items-center text-7xl">
-    <HelloCard></HelloCard>
+<div class="h-screen w-screen flex flex-row justify-center items-center text-7xl space-x-20">
+    <HeroCard ></HeroCard>
+    <HeroCard></HeroCard>
+    <HeroCard></HeroCard>
 </div>
 
 <style>
