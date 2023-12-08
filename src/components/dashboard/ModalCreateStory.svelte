@@ -1,4 +1,4 @@
-<script lang="ts">
+ <script lang="ts">
     import Input from "./Input.svelte";
         import {array, number, object, string} from "yup";
         import {createForm} from "felte";
@@ -38,7 +38,7 @@
             choice: 0,
         },
         onSubmit: async (values: any) => {
-            axios.post("http://localhost:3000/story", values)
+            axios.post("https://ndi.mathis-mazoyer.fr/story", values)
                 .then((response) => {
                     stories = [...stories, response.data.data]
                     //@ts-ignore

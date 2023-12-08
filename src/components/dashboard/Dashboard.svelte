@@ -8,7 +8,7 @@
     let stories: IStory[] = [];
 
     onMount(async () => {
-        stories = (await axios.get('http://localhost:3000/story/')).data.data;
+        stories = (await axios.get('https://ndi.mathis-mazoyer.fr/story/')).data.data;
     });
 
 </script>

@@ -26,7 +26,7 @@
     }
 
     function deleteStory() {
-        axios.delete("http://localhost:3000/story/" + story?._id)
+        axios.delete("https://ndi.mathis-mazoyer.fr/story/" + story?._id)
             .then(() => {
                 stories = stories.filter(s => s._id !== story._id);
             })
@@ -51,7 +51,7 @@
         extend: [validator({schema})],
         initialValues: story,
         onSubmit: async (values: any) => {
-            axios.put("http://localhost:3000/story/" + story?._id, values)
+            axios.put("https://ndi.mathis-mazoyer.fr/story/" + story?._id, values)
                 .then((response) => {
                     stories = stories.map(s => {
                         if (s._id === story._id) {
