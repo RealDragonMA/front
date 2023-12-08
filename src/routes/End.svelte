@@ -23,7 +23,7 @@
 </script>
 
 <div class="w-full absolute top-52 flex flex-row gap-6 justify-center">
-    <p class="p-16 rounded-md font-bold {average>5 ? 'bg-green-300' : 'bg-red-200'}">Vous avez une moyenne de bons choix {average}/10 {average>5 ? "bravo !" : "encore quelques efforts pour le climat à faire..."}</p>
+    <p class="p-16 rounded-md font-bold {average>5 ? 'bg-green-300' : 'bg-red-200'}">Vous avez une moyenne de bons choix de {average}/10 {average>5 ? "bravo !" : "encore quelques efforts pour le climat à faire..."}</p>
 </div>
 
 <div class="h-full w-full hp-hero">
