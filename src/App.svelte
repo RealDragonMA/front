@@ -43,7 +43,7 @@
 <Router>
     <Route path="/dashboard" component={Dashboard}/>
     <Route path="/" component={Homepage}/>
-    <div class="h-screen w-screen flex flex-row justify-center items-center text-7xl">
+    <div class="w-full flex flex-row justify-center items-center text-7xl">
         <Route component="{Error404}"/>
     </div>
 </Router>
