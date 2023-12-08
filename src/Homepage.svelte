@@ -44,7 +44,7 @@
                 isEnd = true;
             } else {
                 if(currentStory.responses.length === 0){
-                    navigate("/ohbahnoncestpasfait", {replace: true});
+                    navigate("/ohbahnoncestpasfait");
                 } else {
                     await updateBackground(currentStory.page);
                 }
