@@ -13,5 +13,5 @@ Le site a été deployé à l'aide de Cloudflare Pages, il est donc accessible �
 
 Le serveur (restAPI) est deployé sur un serveur à l'aide de Docker et Docker-compose à l'adresse suivante : https://ndi.mathis-mazoyer.fr/
 
-Nous utilisons un base de données MongoDB Atlas pour stocker les données et nous avons fait un "dasboard" pour ajouter des histoires et les lier à d'autres.
+Nous utilisons un base de données MongoDB Atlas pour stocker les données et nous avons fait un "dashboard" pour ajouter des histoires et les lier à d'autres.
 Ce dashboard est accessible via l'adresse suivante : https://nuit-info.mathis-mazoyer.fr/dashboard
