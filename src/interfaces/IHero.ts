@@ -1,5 +1,6 @@
 export default interface IHero {
     name: string,
     desc: string,
-    logoRoute: string
+    logoRoute: string,
+    starter: string
 }
