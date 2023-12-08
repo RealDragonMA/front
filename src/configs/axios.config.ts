@@ -2,7 +2,7 @@ import axios, { type AxiosInstance } from 'axios';
 import type IError from "../interfaces/IError";
 
 const restAPI: AxiosInstance = axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: 'https://ndi.mathis-mazoyer.fr',
 });
 
 restAPI.interceptors.response.use(
