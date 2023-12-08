@@ -9,6 +9,7 @@
     import type IStory from "./interfaces/IStory";
     import End from "./routes/End.svelte";
     import {boolean} from "yup";
+    import {navigate} from "svelte-routing";
 
     let isEnd: boolean = false;
 
@@ -42,7 +43,12 @@
             if(currentStory.page === "Fin"){
                 isEnd = true;
             } else {
-                await updateBackground(currentStory.page);
+                if(currentStory.responses.length === 0){
+                    navigate("/ohbahnoncestpasfait", {replace: true});
+                } else {
+                    await updateBackground(currentStory.page);
+                }
+
             }
         }
     }
