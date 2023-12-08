@@ -7,6 +7,10 @@
     import Story from "./services/Story";
     import Start from "./routes/Start.svelte";
     import type IStory from "./interfaces/IStory";
+    import End from "./routes/End.svelte";
+    import {boolean} from "yup";
+
+    let isEnd: boolean = false;
 
     let allStory: IStory[] = [];
 
@@ -35,7 +39,11 @@
         }
         if(myChoice !== ""){
             currentStory = await (Story.get({storyId: myChoice}));
-            await updateBackground(currentStory.page);
+            if(currentStory.page === "Fin"){
+                isEnd = true;
+            } else {
+                await updateBackground(currentStory.page);
+            }
         }
     }
 
@@ -51,6 +59,7 @@
             hero = undefined;
             background = Start;
         }
+        isEnd = false;
     }
 
     onMount(async () => {
@@ -67,6 +76,10 @@
 
 <Index bind:myHero={hero} bind:myChoice={myChoice} title={currentStory?.title ?? ""} description={currentStory?.description ?? ""} responses={currentStory?.responses ?? []} goBack={goBack}>
     <div slot="page" class="h-full w-full">
-        <svelte:component this={background}></svelte:component>
+        {#if isEnd}
+            <End ways={myStory}/>
+        {:else}
+            <svelte:component this={background}></svelte:component>
+        {/if}
     </div>
 </Index>
