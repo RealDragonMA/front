@@ -66,11 +66,11 @@
                 console.log("here1")
                 canGo = false
             }
-            else if (piece.piece[i][1] == 1 && (piece.y -2) < 0){
+            else if (piece.piece[i][1] == 1 && (piece.y) < 0){
                 console.log("here2")
                 canGo = false
             }
-            else if (piece.piece[i][2] == 1 && (piece.y - 3) < 0){
+            else if (piece.piece[i][2] == 1 && (piece.y +1) < 0){
                 console.log("here3")
                 canGo = false
             }
@@ -90,9 +90,10 @@
                 console.log("here2")
                 canGo = false
             }
-            else if (piece.piece[i][0] == 1 && piece.y + 2 > 12){
+            else if (piece.piece[i][0] == 1 && piece.y + 2 > 12) {
                 console.log("here2")
                 canGo = false
+            }
         }
         console.log(canGo)
         return canGo
@@ -103,14 +104,16 @@
         for (let i = 0; i < 3; i++) {
             console.log("x = "+piece.x)
             let newx = piece.x+1
-            if (piece.piece[2][i] == 1 && newx+1 > 24){
+            if (piece.piece[2][i] == 1 && table[newx+2][piece.y+i] !== '0'){
                 return false
             }
-            if (piece.piece[1][i] == 1 && newx+2 > 24){
+            else if (piece.piece[2][i] == 1 && newx+1 > 24){
+                return false
+            }
+            else if (piece.piece[1][i] == 1 && newx+2 > 24){
                 return false
             }
         }
-        console.log(canGo)
         return canGo
     }
 
@@ -150,7 +153,12 @@
     });
 
     setInterval(() => {
-        movePieceDown()
+        if (canGoDown()){
+            movePieceDown()
+        }else{
+            generatePiece()
+            insertPieceInTab(piece)
+        }
     }, 1000)
 
 
