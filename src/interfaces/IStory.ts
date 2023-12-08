@@ -1,12 +1,11 @@
-export interface IStory {
+import type IResponse from "./IResponse";
+
+export default interface IStory {
     _id: string,
-    page: string,
     title: string,
     description: string,
-    responses: {
-        icon: string | undefined,
-        title: string
-    }[]
+    page: string,
     choice: number,
-    components: any[],
+    responses: IResponse[],
+    components: any[]
 }
