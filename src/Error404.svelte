@@ -6,6 +6,8 @@
     let colors = {"0": "bg-white","o": "bg-orange-500", "b": "bg-blue-500", "g": "bg-green-500", "r": "bg-red-500", "y": "bg-yellow-500", "p": "bg-pink-500", "u": "bg-purple-500"}
     let table = []
     let piece: IPiece = {piece: [], color: "", x: 0, y: 0}
+    let score = 0
+    let perdu = false
 
     for (let i = 0; i < 25; i++) {
         table.push([])
@@ -14,6 +16,7 @@
         }
     }
     function generatePiece(){
+        console.log("generate")
         piece.piece = pieces[Math.floor(Math.random() * pieces.length)]
         piece.color =  stringColors[Math.floor(Math.random() * stringColors.length)]
         piece.x = 0
@@ -27,7 +30,6 @@
                 }
             }
         }
-        console.log(table);
     }
 
     function removePiece(){
@@ -102,19 +104,50 @@
     function canGoDown(): boolean{
         let canGo = true
         for (let i = 0; i < 3; i++) {
-            console.log("x = "+piece.x)
-            let newx = piece.x+1
-            if (piece.piece[2][i] == 1 && table[newx+2][piece.y+i] !== '0'){
-                return false
+            if (piece.piece[2][i] == 1 && piece.x + 4 > 25){
+                console.log("here1")
+                canGo = false
             }
-            else if (piece.piece[2][i] == 1 && newx+1 > 24){
-                return false
+            else if (piece.piece[1][i] == 1 && piece.x + 3 > 25){
+                console.log("here2")
+                canGo = false
             }
-            else if (piece.piece[1][i] == 1 && newx+2 > 24){
-                return false
+            else if (piece.piece[0][i] == 1 && piece.x + 2 > 25) {
+                console.log("here3")
+                canGo = false
+            }else{
+                try {
+                    if (piece.piece[2][i] == 1 && stringColors.includes(table[piece.x + 3][piece.y + i])) {
+                        console.log("here1")
+                        canGo = false
+                    }
+                    if (table[piece.x + 1][piece.y + i] == 1 && stringColors.includes(table[piece.x + 4][piece.y + i])) {
+                        console.log("here5")
+                        canGo = false
+                    }
+                    if (table[piece.x][piece.y + i] == 1 && stringColors.includes(table[piece.x + 3][piece.y + i])) {
+                        console.log("here3")
+                        canGo = false
+                    }
+                }catch (e) {
+                    console.log(e)
+                    canGo = false
+                }
             }
         }
         return canGo
+    }
+
+    function newTurn(){
+        for (let i = 0; i < table[0].length; i++) {
+            if (table[0][i] !== '0'){
+                perdu = true
+            }
+        }
+        // détecter si une ligne est complète
+        detectLines()
+        generatePiece()
+        insertPieceInTab(piece)
     }
 
     function handleArrow(event) {
@@ -139,7 +172,7 @@
                 console.log(piece.y)
                 insertPieceInTab(piece)
             }
-            insertPieceInTab(piece)
+            newTurn()
         }
         if (event.key === ' ') {
             removePiece()
@@ -150,10 +183,10 @@
 
     function detectLines(){
         let lineBreak = 0
-        for (let i = table.length; i < 0; i--) {
+        for (let i = 0; i < table.length; i++) {
             let line = table[i]
             let isLine = true
-            for (let j = 0; j < line.length; j++) {
+            for (let j = 0; j < 12; j++) {
                 if (line[j] == '0'){
                     isLine = false
                 }
@@ -163,7 +196,16 @@
                 for (let j = 0; j < 12; j++) {
                     table[i][j] = '0'
                 }
+                for (let j = i; j > 0; j--) {
+                    table[j] = Object.assign([],table[j - 1])
+                }
+                for (let j = 0; j < 12; j++) {
+                    table[0][j] = '0'
+                }
             }
+        }
+        if (lineBreak > 0){
+            score += lineBreak * 12
         }
     }
 
@@ -173,8 +215,7 @@
         if (canGoDown()){
             movePieceDown()
         }else{
-            generatePiece()
-            insertPieceInTab(piece)
+            newTurn()
         }
     }, 1000)
 
@@ -207,6 +248,15 @@
         </div>
     </div>
 </div>
+<div class="absolute bottom-10 right-20 text-xl">
+    Score : {score}
+</div>
+{#if perdu}
+    <div class="w-screen h-screen backdrop-blur-sm bg-white/30 absolute z-30 pt-40">
+            <p class="text-4xl text-center">Perdu</p>
+            <p class="text-2xl text-center">Score : {score}</p>
+    </div>
+{/if}
 
 <style>
     .case {
