@@ -3,7 +3,7 @@
 
 <style>
     .bg-velo {
-        background-image: url("../velo.jpg");
+        background-image: url("../../../public/velo.jpg");
         background-position: 50%;
         background-size: cover;
     }
