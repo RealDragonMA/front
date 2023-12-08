@@ -117,13 +117,22 @@
         return canGo
     }
 
-    document.addEventListener('keypress', (event) => {
-        if (event.key === ' ') {
-            removePiece()
-            rotatePiece()
-            insertPieceInTab(piece)
+    function handleArrow(event) {
+        if (event.key === "ArrowLeft") {
+            if (canGoLeft()){
+                removePiece()
+                piece.y--
+                insertPieceInTab(piece)
+            }
         }
-        if(event.key === 'k'){
+        if (event.key === "ArrowRight") {
+            if (canGoRight()){
+                removePiece()
+                piece.y++
+                insertPieceInTab(piece)
+            }
+        }
+        if (event.key === "ArrowDown") {
             while (canGoDown()){
                 removePiece()
                 piece.x++
@@ -133,24 +142,17 @@
             generatePiece()
             insertPieceInTab(piece)
         }
-        if (event.key === 'p') {
-            if (canGoRight()){
-                removePiece()
-                piece.y++
-                insertPieceInTab(piece)
-            }
+        if (event.key === ' ') {
+            removePiece()
+            rotatePiece()
+            insertPieceInTab(piece)
         }
 
-        if (event.key === 'l') {
-            console.log("oui")
-            if (canGoLeft()){
-                removePiece()
-                piece.y--
-                insertPieceInTab(piece)
-            }
 
-        }
-    });
+    }
+
+
+    window.addEventListener("keydown", handleArrow);
 
     setInterval(() => {
         if (canGoDown()){
