@@ -1,42 +1,21 @@
-<div class="h-screen w-screen flex flex-row justify-center items-center text-7xl">
-    <p>Hello World</p>
-    <span class='hello-emoji'>👋</span>
-    <p>!</p>
-</div>
+<script lang="ts">
+    import axios from "axios";
+    import List from "./List.svelte";
+    import type {IStory} from "./interfaces/IStory";
+    import {onMount} from "svelte";
+    import ModalCreateStory from "./components/ModalCreateStory.svelte";
 
-<style>
-    .hello-emoji {
-        animation-name: wave-animation;
-        animation-duration: 2.5s;
-        animation-iteration-count: infinite;
-        transform-origin: 70% 70%;
-        display: inline-block;
-    }
+    let stories: IStory[] = [];
 
-    @keyframes wave-animation {
-        0% {
-            transform: rotate(0deg);
-        }
-        15% {
-            transform: rotate(14deg);
-        }
-        30% {
-            transform: rotate(-8deg);
-        }
-        40% {
-            transform: rotate(14deg);
-        }
-        50% {
-            transform: rotate(-4deg);
-        }
-        60% {
-            transform: rotate(10deg);
-        }
-        70% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(0deg);
-        }
-    }
-</style>
+    onMount(async () => {
+        stories = (await axios.get('http://localhost:3000/story/')).data.data;
+    });
+
+</script>
+
+<main class="w-full h-full p-4">
+    <button onclick="my_modal_1.showModal()" class="btn">Créer histoire</button>
+    <List bind:stories="{stories}"/>
+</main>
+
+<ModalCreateStory bind:stories="{stories}"/>
