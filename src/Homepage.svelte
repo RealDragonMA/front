@@ -18,7 +18,7 @@
     let background: any = Start;
 
     async function updateBackground(page: string){
-        await import('./backgrounds/' + page + '.svelte').then(data => {
+        await import('/backgrounds/' + page + '.svelte').then(data => {
             background = data.default;
         }).catch(() => {
             background = Start;

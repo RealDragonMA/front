@@ -3,7 +3,7 @@
 
 <style>
     .bg-pl {
-        background-image: url("../../../public/foule.jpg");
+        background-image: url("../foule.jpg");
         background-position: 50%;
         background-size: cover;
     }
