@@ -139,7 +139,6 @@
                 console.log(piece.y)
                 insertPieceInTab(piece)
             }
-            generatePiece()
             insertPieceInTab(piece)
         }
         if (event.key === ' ') {
@@ -147,10 +146,26 @@
             rotatePiece()
             insertPieceInTab(piece)
         }
-
-
     }
 
+    function detectLines(){
+        let lineBreak = 0
+        for (let i = table.length; i < 0; i--) {
+            let line = table[i]
+            let isLine = true
+            for (let j = 0; j < line.length; j++) {
+                if (line[j] == '0'){
+                    isLine = false
+                }
+            }
+            if (isLine){
+                lineBreak++
+                for (let j = 0; j < 12; j++) {
+                    table[i][j] = '0'
+                }
+            }
+        }
+    }
 
     window.addEventListener("keydown", handleArrow);
 
@@ -162,11 +177,6 @@
             insertPieceInTab(piece)
         }
     }, 1000)
-
-
-
-
-
 
 </script>
 
