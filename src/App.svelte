@@ -20,8 +20,14 @@
     let responses: IResponse[] = [{_id: "1", title: "Suivant"}];
     let background: any = Start;
 
+    async function updateBackground(page: string){
+        background = (await import('./route/' + page + '.svelte')).default;
+    }
+
     function update(): void {
         desc = "En tant que " + hero?.name + ", vous allez devoir agir pour faire face au changement climatique.";
+
+        updateBackground("Maison");
     }
 
     async function next(): Promise<void> {
@@ -29,16 +35,20 @@
             myStory = [...myStory, myChoice];
         }
         currentStory = await (Story.get({storyId: myChoice}));
+        await updateBackground(currentStory.page);
     }
 
-    function goBack(): void {
+    async function goBack(): Promise<void> {
         myStory = myStory.slice(0, myStory.length - 1);
         if(myStory.length > 0){
             myChoice = myStory[myStory.length - 1];
+            currentStory = await (Story.get({storyId: myChoice}));
+            await updateBackground(currentStory.page);
         } else {
             myChoice = "";
             myStory = [];
             hero = undefined;
+            background = Start;
         }
     }
 
@@ -56,7 +66,7 @@
 
 <Index bind:myHero={hero} bind:myChoice={myChoice} title={currentStory?.title ?? title} description={currentStory?.description ?? desc} responses={currentStory?.responses ?? responses} goBack={goBack}>
     <div slot="page" class="h-full w-full">
-        <svelte:component this={(currentStory?.page ?? background)}></svelte:component>
+        <svelte:component this={background}></svelte:component>
     </div>
 </Index>
 
