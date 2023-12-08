@@ -1,6 +1,6 @@
 <script lang="ts">
 
-    import type {IStory} from "../interfaces/IStory";
+    import type {IStory} from "../../interfaces/IStory";
     import Icon from "@iconify/svelte";
     import axios from "axios";
     import {array, number, object, string} from "yup";

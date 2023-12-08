@@ -4,7 +4,7 @@
         import {createForm} from "felte";
         import {validator} from "@felte/validator-yup";
         import axios from "axios";
-        import type {IStory} from "../interfaces/IStory";
+        import type {IStory} from "../../interfaces/IStory";
 
     export let stories: IStory[]
 

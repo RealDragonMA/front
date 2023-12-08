@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type {IStory} from "./interfaces/IStory";
-    import StoryCard from "./components/StoryCard.svelte";
+    import type {IStory} from "../../interfaces/IStory";
+    import StoryCard from "./StoryCard.svelte";
 
     export let stories: IStory[] = [];
 
