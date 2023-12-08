@@ -18,7 +18,11 @@
     let background: any = Start;
 
     async function updateBackground(page: string){
-        background = (await import('./route/' + page + '.svelte')).default;
+        await import('./routes/' + page + '.svelte').then(data => {
+            background = data.default;
+        }).catch(() => {
+            background = Start;
+        });
     }
 
     function update(): void {
