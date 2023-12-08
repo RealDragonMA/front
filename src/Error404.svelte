@@ -221,7 +221,7 @@
 
 </script>
 
-<div class="h-screen w-screen bg-white-200 overflow-hidden flex flex-col justify-between">
+<div class="h-screen w-screen bg-white-200 overflow-hidden flex flex-col justify-between text-7xl">
     <p class="w-screen flex justify-center">
         <span class="text-red-500">T</span>
         <span class="text-orange-500">E</span>
