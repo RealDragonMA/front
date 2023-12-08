@@ -1,5 +1,5 @@
 <div class="h-full w-full hp-hero">
-    <figure class="absolute bottom-0 left-3"><img class="w-42" src="../../public/hero-illustrations.png" alt="Shoes" /></figure>
+    <figure class="absolute bottom-0 left-3"><img class="w-42" src="hero-illustrations.png" alt="Shoes" /></figure>
 </div>
 
 <style>
